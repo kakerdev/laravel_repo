@@ -1,0 +1,8 @@
+//wyśrodkowanie pionowo, poziomo
+@mixin centerTextVerticalHorizontal {
+  //center text
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  //end cetnter text
+}

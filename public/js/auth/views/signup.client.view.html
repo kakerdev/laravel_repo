@@ -1,0 +1,30 @@
+<section>
+    <h1>Zarejestruj się</h1>
+    <form name="signupForm" ng-submit="signup()">
+        <div class="form-group">
+            <label for="firstname">Imie</label>
+            <input type="text" class="form-control" id="firstname" ng-model="firstname" placeholder="Imie" required>
+        </div>
+        <div class="form-group">
+            <label for="lastname">Nazwisko</label>
+            <input type="text" class="form-control" id="lastname" ng-model="lastname" placeholder="Nazwisko" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Adres email</label>
+            <input type="email" class="form-control" id="email" ng-model="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Hasło</label>
+            <input type="password" class="form-control" id="password" ng-model="password" placeholder="Hasło" required>
+            <span class="red" ng-if="password.length < 6">Hasło musi zawierać min.6 znaków</span>
+        </div>
+        <div class="form-group">
+            <label for="repeatPassword">Powtórz hasło</label>
+            <input type="password" class="form-control" id="repeatPassword" ng-model="repeatPassword" placeholder="Powtórz hasło" required>
+            <span class="red" ng-if="repeatPassword != password">Hasła nie pasują do siebie</span>
+        </div>
+        <button type="submit" class="btn btn-primary"
+                ng-disabled="signupForm.$invalid || signupForm.email.$invalid ||
+                password.length < 6 || repeatPassword != password">Zarejestruj się</button>
+    </form>
+</section>

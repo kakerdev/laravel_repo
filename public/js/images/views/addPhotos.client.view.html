@@ -1,0 +1,47 @@
+<section nazwa="Dodaj zdjecia">
+<h1>Dodaj zdjęcia do swojej galerii</h1>
+    <div class="alert alert-info" role="alert">
+        <p>Uwaga: bez podania folderu. Zdjęcia domyślnie zapisywane do folderu: glowny.</p>
+    </div>
+<form name="addPhotos" >
+    <div class="form-group">
+        <label for="newFolder">Stwórz nowy folder (opcjonalnie)</label>
+        <input type="text" class="form-control" id="newFolder" ng-model="newFolder" placeholder="Nazwa folderu">
+        <span>Folder zostanie stworzony przy dodaniu zdjęcia.</span>
+    </div>
+    <div class="form-group" ng-init="getRepoUser()">
+        <div class="alert alert-info" role="alert" ng-if="repoUser.data == 'notFound'">
+            <p>Brak foderów. Zdjęcia domyślnie zapisywane do folderu glowny.</p>
+        </div>
+        <div ng-if="repoUser.data != 'notFound'">
+            <label for="addToFolder">lub dodaj do istniejącego folderu:</label>
+            <select class="form-control" id="addToFolder" ng-model="selectFolder">
+                <option ng-repeat="folder in repoUser.data" value="{{folder.title}}">{{folder.title}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="title">Tytuł zdjęcia</label>
+        <input type="text" class="form-control" id="title" ng-model="title" placeholder="tytuł zdjęcia" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Opis zdjęcia</label>
+        <textarea class="form-control" rows="5" id="description" ng-model="description" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputFile">Dodaj zdjecia</label>
+        <div class="btn btn-danger" ngf-select ng-model="files" name="filefield" ngf-multiple="true">Wybierz pliki</div>
+    </div>
+    <div class="form-group">
+        <h5 ng-show="files.length > 0">Wybrałeś <span class="badge" ng-bind="files.length"></span> zdjęć.</h5>
+        <div ng-show="files.length > 0" class="col-xs-6 col-sm-4 col-md-3 its" ng-repeat="img in files">
+            <img ngf-src="img" style="width: 160px; height: 160px;">
+            <p>{{img.name}}</p>
+            <button class="btn btn-primary" ng-click="remove(img)">Remove</button>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" ng-click="uploadImg(files)">Dodaj zdjęcia</button>
+
+</form>
+</section>

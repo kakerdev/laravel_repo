@@ -1,0 +1,4 @@
+<section ng-init="errorPage()">
+    <div ng-bind="errorData.obj"></div>
+    <div ng-bind-html="errorData.obj.data | to_trusted"></div>
+</section>

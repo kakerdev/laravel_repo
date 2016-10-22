@@ -1,0 +1,14 @@
+<section nazwa="Wszystkie zdjęcia">
+    <h1>Twoja galeria zdjęć</h1>
+    <div ng-init="getAll()">
+        <div class="row">
+            <div class="col-xs-6 col-md-3" ng-repeat="img in images.data">
+                <a href="#/images/image/{{img.id}}" target="_blank" class="thumbnail">
+                    <img src="upload/{{img.filename}}.png" alt="">
+                </a>
+                <p>{{img.original_filename}}</p>
+                <button ng-click="destroy(img.id)" class="btn btn-danger">Usuń zdjęcie</button>
+            </div>
+        </div>
+    </div>
+</section>

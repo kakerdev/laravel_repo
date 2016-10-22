@@ -1,0 +1,11 @@
+<section nazwa="Zdjęcie" ng-init="findOne()" style="">
+    <h1>Zdjęcie: {{image[0].original_filename}}</h1>
+    <img ng-src="upload/{{image[0].filename}}.png" alt="{{image[0].original_filename}}">
+    <div>
+        <h3>Nazwa zdjęcia</h3>
+        <p>{{image[0].original_filename}}</p>
+        <h3>Opis zdjęcia</h3>
+        <p>{{image[0].description}}</p>
+
+    </div>
+</section>

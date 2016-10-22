@@ -1,0 +1,12 @@
+<section nazwa="Twoja galeria">
+
+    <div ng-init="getRepoUser()">
+        <h1>Twoje foldery</h1>
+        <div class="alert alert-warning" role="alert" ng-if="repoUser.data == 'notFound'">Brak folderów.</div>
+        <ul ng-if="!notFound">
+            <li ng-repeat="f in repoUser.data">
+                <a href="#/showRepo/{{f.id}}">{{f.title}}</a>
+            </li>
+        </ul>
+    </div>
+</section>

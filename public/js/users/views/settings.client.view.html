@@ -1,0 +1,39 @@
+<section nazwa="Ustawienia">
+    <h1>Ustawienia konta</h1>
+    <table class="table table-bordered">
+        <tbody>
+            <tr><td>Imie</td><td>{{currentUser.firstname}}</td></tr>
+            <tr><td>Nazwisko</td><td>{{currentUser.lastname}}</td></tr>
+            <tr><td>Adress email</td><td>{{currentUser.email}}</td></tr>
+            <tr>
+                <td>Hasło</td>
+                <td>
+                    <p ng-if="resChangePassword">{{resChangePassword}}</p>
+                    <button class="btn btn-primary" ng-click="showForm = !showForm ">Zmień</button>
+                    <form name="newPassForm" ng-show="showForm" ng-submit="changePassword()">
+                        <div class="form-group">
+                            <label for="oldPass">Bieżące hasło</label>
+                            <input type="password" class="form-control" ng-model="oldPass" id="oldPass" placeholder="Podaj bieżące hasło" required>
+                            <span class="red" ng-if="oldPass.length == ''">Pole nie może być puste.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPass">Nowe hasło</label>
+                            <input type="password" class="form-control" ng-model="newPass" id="newPass" placeholder="Nowe hasło" required>
+                            <span class="red" ng-if="newPass.length < 6">Hasło musi zawierać min.6 znaków</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPass1">Powtórz nowe hasło</label>
+                            <input type="password" class="form-control" ng-model="newPass1" id="newPass1" placeholder="Powtórz nowe hasło" required>
+                            <span class="red" ng-if="newPass1 != newPass">Hasła nie pasują do siebie</span>
+                        </div>
+                        <button class="btn btn-danger" type="submit"
+                                ng-disabled="newPassForm.$invalid || oldPass == '' || newPass.lenght <6 || newPass1 != newPass">
+                            Zmień hasło</button>
+
+                    </form>
+                </td>
+            </tr>
+            <tr><td>Data założenia konta</td><td>{{currentUser.created_at}}</td></tr>
+        </tbody>
+    </table>
+</section>

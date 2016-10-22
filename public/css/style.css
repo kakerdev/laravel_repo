@@ -1,0 +1,15 @@
+body, html {
+  margin: 0;
+  padding: 0; }
+
+.wrapper {
+  width: 960px;
+  margin: 0 auto; }
+
+header {
+  padding: 10px; }
+
+.red {
+  color: #F00; }
+
+/*# sourceMappingURL=style.css.map */

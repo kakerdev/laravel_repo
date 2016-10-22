@@ -1,0 +1,19 @@
+<section>
+    <h1>Zaloguj się</h1>
+    <div class="alert alert-danger" role="alert" ng-if="errorSignin.data.error">{{errorSignin.data.error}}</div>
+    <form name="signinForm" ng-submit="signin(signinEmail, signinPassword)">
+        <div class="form-group">
+            <label for="email">Adres email</label>
+            <input type="email" class="form-control" id="email" ng-model="signinEmail" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Hasło</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" ng-model="signinPassword" placeholder="Password" required>
+            <span class="red" ng-if="signinPassword.length < 6">Podaj minimum 6 znaków.</span>
+        </div>
+        <div class="form-group">
+            <a href="#/forgotPassword">Zapomniałem hasła</a>
+        </div>
+        <button type="submit" class="btn btn-primary" ng-disabled="signinForm.$invalid || signinPassword.length < 6">Zaloguj się</button>
+    </form>
+</section>
