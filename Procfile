@@ -1,1 +1,1 @@
-web: php artisan serve --host desolate-taiga-90779.herokuapp.com
+web: vendor/bin/heroku-php-apache2 public/
