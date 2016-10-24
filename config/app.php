@@ -25,7 +25,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+    'env' => env('APP_ENV'),
 
     /*
     |--------------------------------------------------------------------------
@@ -103,7 +103,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY', 'g2SGsxeEXnEwGPZ+sz/Nvdh+S/g9s7cL2KjaPmNbDX8='),
+    'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
 

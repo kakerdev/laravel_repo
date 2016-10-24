@@ -16,7 +16,7 @@ angular.module('imagesModule').controller('imagesCtrl', function ($scope,$rootSc
     $scope.getAll = function () {
         $http.get('api/images/showAll').then(function (res) {
             console.log('getImg');
-            console.log(res);
+            $scope.message = res.data;
             $scope.images = res;
         })
     }

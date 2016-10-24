@@ -69,16 +69,15 @@ class ImagesController extends Controller
         $idRepo = $this->repoController->createRepoUser($dataFile['dataFile']['repoName']);
         $size = getimagesize($file);
         $path = $file->getFilename().'.'.$extension;
+        echo $idRepo;
         //zmiana rozdzielczości zdjecia
         if($size[0] > 1280 && $size[1] > 720) {
-            $newimg = Image::make($file->getRealPath())->resize(1280, 720)->save(public_path('/upload/'.$path));
-            return $newimg;
+            Image::make($file->getRealPath())->resize(1280, 720)->save(public_path('/upload/'.$path));
         } else {
             if(!Storage::disk('uploads')->put($file->getFilename().'.'.$extension,  File::get($file))) {
                 return $this->errors(['message' => 'Wystąpił bład podczas dodawania zdjęcia.', 'code' => 400]);
             }
         }
-
         $image = new images();
         $image->id_repository = $idRepo;
         $image->title = $dataFile['dataFile']['title'];

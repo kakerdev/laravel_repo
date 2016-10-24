@@ -34,7 +34,9 @@ class RepoController extends Controller
             ->where('title', $repoName)
             ->where('id_account', $this->user->id)
             ->get();
-        $x = $repoUser[0];
+        if($repoUser->count() == 1) {
+            $x = $repoUser[0];
+        }
         if($repoUser->count() == 0 || $repoUser = null) {
             $createRepoUser = new Repository();
             $createRepoUser->title = $repoName;
