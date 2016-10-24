@@ -1,10 +1,10 @@
 <section nazwa="Zdjęcia w danym repozytorium">
-    <h1>Zdjęcia w folderze: glowy</h1>
+    <h1>Zdjęcia w folderze: {{imgByRepo.data[0].repoName}} ({{imgByRepo.data.length}})</h1>
     <div ng-init="getImgByRepo()">
         <div class="row">
             <div class="col-xs-6 col-md-3" ng-repeat="img in imgByRepo.data">
                 <a href="#/images/image/{{img.id}}" target="_blank" class="thumbnail">
-                    <img src="upload/{{img.filename}}.png" alt="">
+                    <img src="upload/{{img.filename}}.{{img.extension}}" alt="">
                 </a>
                 <p>{{img.original_filename}}</p>
             </div>

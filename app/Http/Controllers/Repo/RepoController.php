@@ -51,7 +51,10 @@ class RepoController extends Controller
 
     //pobierz wszystkie zdjęcia użytkownika z danego repo
     public function getImgByRepo($id_repository) {
-        $images = images::where('id_repository', $id_repository)->get();
+        $images = images::select('images.*', 'repository.title as repoName')
+            ->join('repository', 'images.id_repository','=','repository.id')
+            ->where('repository.id','=', $id_repository)
+            ->get();
         if($images->count() <= 0) {
             return response('Brak zdjęć w danym repozytorium');
         }

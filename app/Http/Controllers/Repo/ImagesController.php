@@ -66,7 +66,7 @@ class ImagesController extends Controller
         //miejsce i zapis zdjecia
         $filename = $file->getClientOriginalName();
         $extension = $file->getClientOriginalExtension();//rozszerzenie zdjęcia
-        //$idRepo = $this->repoController->createRepoUser($dataFile['dataFile']['repoName']);
+        $idRepo = $this->repoController->createRepoUser($dataFile['dataFile']['repoName']);
         $size = getimagesize($file);
         $path = $file->getFilename().'.'.$extension;
         //zmiana rozdzielczości zdjecia
@@ -90,6 +90,7 @@ class ImagesController extends Controller
         if(!$image->save()) {
             return $this->errors(['message' => 'Wystąpił bład podczas zapisu zdjecia do bazy danych.', 'code' => 400]);
         }
+        return response('Zdjęcie zostało dodane.');
     }
     public function updateImg() {
         $image = images::where('id', $id_image)

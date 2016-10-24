@@ -18,10 +18,14 @@
     <script src="lib/jquery/dist/jquery.min.js"></script>
     <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
+    <!-- angular loading bar -->
+    <link rel='stylesheet' href='lib/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
+
 </head>
 <body ng-controller="indexCtrl">
 
 <div class="wrapper">
+
     <header>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -65,6 +69,9 @@
 <script src="lib/satellizer/dist/satellizer.min.js"></script>
 <script src="lib/ng-file-upload/ng-file-upload-shim.min.js"></script>
 <script src="lib/ng-file-upload/ng-file-upload.min.js"></script>
+<script type='text/javascript' src='lib/angular-loading-bar/build/loading-bar.min.js'></script>
+
+
 
 <!-- main module -->
 <script src="js/main/main.client.module.js"></script>

@@ -1,6 +1,6 @@
 var nameApp = 'repoApp';
 var mainAppModule = angular.module(nameApp,
-    ['ui.router', 'satellizer', 'ngFileUpload', 'mainModule', 'authModule', 'usersModule',
+    ['ui.router', 'satellizer', 'ngFileUpload','angular-loading-bar', 'mainModule', 'authModule', 'usersModule',
         'repoModule', 'imagesModule']);
 angular.element(document).ready(function () {
     angular.bootstrap(document, [nameApp]);
@@ -8,17 +8,14 @@ angular.element(document).ready(function () {
 mainAppModule.run(function($rootScope, $location, $window) {
     $rootScope.$watch(function () {
             return $location.path();
-
         },
-        function (a) {
-        });
+        function (a) {});
 });
 mainAppModule.controller('indexCtrl', function ($scope, AuthFactory) {
     $scope.isLoggedIn = AuthFactory.isLoggedIn();
     if($scope.isLoggedIn == true) {
         $scope.currentUser = AuthFactory.currentUser();
     }
-
     $scope.logout = function () {
         AuthFactory.logout();
     }

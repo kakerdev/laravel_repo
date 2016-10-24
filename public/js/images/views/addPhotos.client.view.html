@@ -13,15 +13,17 @@
         <div class="alert alert-info" role="alert" ng-if="repoUser.data == 'notFound'">
             <p>Brak foderów. Zdjęcia domyślnie zapisywane do folderu glowny.</p>
         </div>
-        <div ng-if="repoUser.data != 'notFound'">
+        <div ng-show="repoUser.data != 'notFound'">
             <label for="addToFolder">lub dodaj do istniejącego folderu:</label>
-            <select class="form-control" id="addToFolder" ng-model="selectFolder">
+            <select class="form-control" id="addToFolder" name="selectFolder" ng-model="selectFolder">
                 <option ng-repeat="folder in repoUser.data" value="{{folder.title}}">{{folder.title}}</option>
             </select>
         </div>
+
     </div>
 
     <div class="form-group">
+
         <label for="title">Tytuł zdjęcia</label>
         <input type="text" class="form-control" id="title" ng-model="title" placeholder="tytuł zdjęcia" required>
     </div>

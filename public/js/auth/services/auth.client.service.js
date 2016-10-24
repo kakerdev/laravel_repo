@@ -1,18 +1,8 @@
-angular.module('authModule').factory('AuthFactory', function ($http, $auth, $state,$q, $window, $location) {
+angular.module('authModule').factory('AuthFactory', function ($http, $auth , $log, $state,$q, $window, $location) {
     var signup = function (data) {
         return $http.post('api/authenticate/register', data);
     }
-    var logout = function () {
-        $auth.logout().then(function () {
-            //usuwamy uzytkownika z pamieci podrecznej
-            localStorage.removeItem('user');
-            //$state.transitionTo('home', null, {reload: true, notify:true});
-            $state.transitionTo('home', null, {
-                reload: true, inherit: false, notify: true
-            });
-            $window.location.reload();
-        })
-    }
+
     var setUserData = function (data) {
         //zapisujemy dane w pamięci podręcznej
         var user = JSON.stringify(data);
@@ -39,14 +29,29 @@ angular.module('authModule').factory('AuthFactory', function ($http, $auth, $sta
             console.log('Brak danych użytkownika');
         }
     }
+    var changeUrl = function (path) {
+        var url = "http://" + $window.location.host + "/#/"+path;
+        $log.log(url);
+        $window.location.href = url;
+        $window.location.reload();
+    }
+    var logout = function () {
+        $auth.logout().then(function () {
+            //usuwamy uzytkownika z pamieci podrecznej
+            localStorage.removeItem('user');
+            changeUrl('home');
+        })
+    }
 
     return {
         signup: signup,
+        changeUrl: changeUrl,
         logout: logout,
         setUserData: setUserData,
         getUserToken: getUserToken,
         getUserData: getUserData,
         isLoggedIn: isLoggedIn,
         currentUser: currentUser,
+
     }
 })

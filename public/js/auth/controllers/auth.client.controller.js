@@ -1,4 +1,4 @@
-angular.module('authModule').controller('authCtrl', function ($scope, $auth, $state, $http,$stateParams, $window, AuthFactory) {
+angular.module('authModule').controller('authCtrl', function ($scope,$log, $auth, $state, $http,$stateParams, $window, AuthFactory) {
 
     //rejestracja uzytkownika
     $scope.signup = function () {
@@ -35,8 +35,9 @@ angular.module('authModule').controller('authCtrl', function ($scope, $auth, $st
         //odbieramy dane zalogowanego użytkownika
         .then(function (res) {
             AuthFactory.setUserData(res.data.user);
-            $state.transitionTo('images', null, {reload: true, notify:true});
-            window.location.reload();
+            // $state.transitionTo('images', null, {reload: true, notify:true});
+            // window.location.reload();
+            AuthFactory.changeUrl('images');
         })
     }
     $scope.errorPage = function () {

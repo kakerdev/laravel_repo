@@ -1,11 +1,6 @@
 <?php
 $url = parse_url(getenv("mysql://b40e7b3cbec1c6:5b7ee37e@us-cdbr-iron-east-04.cleardb.net/heroku_c3e02e4d542f005?reconnect=true"));
 
-$host = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$database = substr($url["path"], 1);
-
 return [
 
     /*
@@ -58,13 +53,26 @@ return [
             'prefix' => '',
         ],
 
+//        'mysql' => [
+//            'driver' => 'mysql',
+//            'host' => env('DB_HOST', 'localhost'),//localhost
+//            'port' => env('DB_PORT', '3306'),
+//            'database' => 'repoApp',
+//            'username' => 'repoApp',
+//            'password' => 'repoApp',
+//            'charset' => 'utf8',
+//            'collation' => 'utf8_unicode_ci',
+//            'prefix' => '',
+//            'strict' => true,
+//            'engine' => null,
+//        ],
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', $host),//localhost
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', $database),//repoApp
-            'username' => env('DB_USERNAME', $username),//repoApp
-            'password' => env('DB_PASSWORD', $password),//repoApp
+            'host' => env('DB_HOST', 'us-cdbr-iron-east-04.cleardb.net'),//localhost
+            //'port' => env('DB_PORT', '3306'),
+            'database' => 'heroku_c3e02e4d542f005',
+            'username' => 'b40e7b3cbec1c6',
+            'password' => '5b7ee37e',
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',

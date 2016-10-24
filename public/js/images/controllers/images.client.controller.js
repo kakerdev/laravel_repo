@@ -1,4 +1,4 @@
-angular.module('imagesModule').controller('imagesCtrl', function ($scope,$rootScope,$stateParams, $http,$window, AuthFactory, RepoFactory, Upload) {
+angular.module('imagesModule').controller('imagesCtrl', function ($scope,$rootScope,$location, $stateParams, $http,$window, AuthFactory, RepoFactory, Upload) {
     // $scope.getRepoUser = function () {
     //     //odwołanie do kontrollera repoCtrl
     //     $rootScope.$on("repoCtrl", {});
@@ -28,6 +28,7 @@ angular.module('imagesModule').controller('imagesCtrl', function ($scope,$rootSc
 
     //dodajemy zdjęcia do repozytorium
     $scope.uploadImg = function (files) {
+
         if(files && files.length) {
             if(this.newFolder != null) {
                 var newFolder = this.newFolder
@@ -37,8 +38,10 @@ angular.module('imagesModule').controller('imagesCtrl', function ($scope,$rootSc
             var dataFiles = {
                 title: this.title,
                 description: this.description,
-                repoName: (this.selectFolder) ? this.selectFolder : newFolder
+                repoName: ($scope.selectFolder) ? $scope.selectFolder : newFolder
             }
+            console.log(dataFiles);
+
             //var user = AuthFactory.getUserToken();
             for(var i=0;i<files.length; i++) {
                 console.log(files[i]);
@@ -48,6 +51,9 @@ angular.module('imagesModule').controller('imagesCtrl', function ($scope,$rootSc
                     data: {
                         dataFile: dataFiles,
                     }
+                }).then(function (res) {
+                    $location.path('/images');
+                    $scope.messages = res.data;
                 })
             }
         }
