@@ -1,4 +1,4 @@
-angular.module('usersModule').config(function ($stateProvider, $urlRouterProvider, AuthFactory) {
+angular.module('usersModule').config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/home');
     // function to check the authentication //
     var Auth = ["$q", "AuthFactory", function ($q, AuthFactory, $window,$log) {
