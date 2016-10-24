@@ -7,7 +7,7 @@ angular.module('usersModule').config(function ($stateProvider, $urlRouterProvide
             return $q.reject({ authenticated: false });
         }
     }];
-    if(Auth) {
+    if(AuthFactory.isLoggedIn()) {
         $urlRouterProvider.otherwise('/images');
     } else {
         $urlRouterProvider.otherwise('/home');

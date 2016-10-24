@@ -10,7 +10,7 @@ angular.module('imagesModule').config(['$stateProvider', '$urlRouterProvider',
             return $q.reject({ authenticated: false });
         }
     }];
-    if(Auth) {
+    if(AuthFactory.isLoggedIn()) {
         $urlRouterProvider.otherwise('/images');
     } else {
         $urlRouterProvider.otherwise('/home');
