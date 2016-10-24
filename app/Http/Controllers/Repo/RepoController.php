@@ -44,7 +44,7 @@ class RepoController extends Controller
             if(!$createRepoUser->save()) {
                 return $this->errors(['message' => 'Wystąpił bład podczas dodawania folderu.', 'code' => 400]);
             } else {
-                return $createRepoUser->save();
+                return $createRepoUser->{'id'};
             }
         } else {
             return $x->{'id'};
@@ -58,7 +58,8 @@ class RepoController extends Controller
             ->where('repository.id','=', $id_repository)
             ->get();
         if($images->count() <= 0) {
-            return response('Brak zdjęć w danym repozytorium');
+            $x = array("m"=>"Brak zdjęć w danym folderze.", "s"=>404);
+            return response('Brak zdjęć w danym folderze.');
         }
         return response()->json($images);
     }

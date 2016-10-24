@@ -6,6 +6,7 @@ angular.element(document).ready(function () {
     angular.bootstrap(document, [nameApp]);
 })
 mainAppModule.run(function($rootScope, $location, $window) {
+    $rootScope.messages = "";
     $rootScope.$watch(function () {
             return $location.path();
         },

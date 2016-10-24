@@ -3,7 +3,7 @@ angular.module('imagesModule').controller('imagesCtrl', function ($scope,$rootSc
     //     //odwołanie do kontrollera repoCtrl
     //     $rootScope.$on("repoCtrl", {});
     // }
-    //na sztywno do poprawy
+    //na sztywno do poprawy szukamy folderow do wyboru
     $scope.getRepoUser = function () {
         RepoFactory.getRepoUser().then(function (res) {
             console.log(res);
@@ -16,8 +16,11 @@ angular.module('imagesModule').controller('imagesCtrl', function ($scope,$rootSc
     $scope.getAll = function () {
         $http.get('api/images/showAll').then(function (res) {
             console.log('getImg');
-            $scope.message = res.data;
-            $scope.images = res;
+            if(res.data.st == 404) {
+                $rootScope.messages = res.data;
+            } else {
+                $scope.images = res;
+            }
         })
     }
     $scope.findOne = function () {
@@ -53,7 +56,7 @@ angular.module('imagesModule').controller('imagesCtrl', function ($scope,$rootSc
                     }
                 }).then(function (res) {
                     $location.path('/images');
-                    $scope.messages = res.data;
+                    //$rootScope.messages = res.data;
                 })
             }
         }
@@ -61,10 +64,11 @@ angular.module('imagesModule').controller('imagesCtrl', function ($scope,$rootSc
     //usuniecie zdjecia z servera
     $scope.destroy = function (id) {
         $http.delete('api/images/'+id).then(function (res) {
-            if(res.status = 200) {
-                $scope.messages = res.data;
-                $scope.getAll();
-            }
+            // if(res.data.st == 200) {
+            //     $rootScope.messages = res.data;
+            //     $scope.getAll();
+            // }
+            $scope.getAll();
 
         })
     }

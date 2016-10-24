@@ -10,8 +10,12 @@ angular.module('repoModule').controller('repoCtrl', function ($scope, $rootScope
     }
     $scope.getImgByRepo = function () {
         RepoFactory.getImgByRepo($stateParams.id_repo).then(function (res) {
-            console.log(res)
-            $scope.imgByRepo = res;
+            console.log(res);
+            if(res.data.s == 404) {
+                $rootScope.messages = res.data;
+            } else {
+                $scope.imgByRepo = res;
+            }
         });
     }
 })

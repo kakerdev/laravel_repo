@@ -1,4 +1,8 @@
 <section nazwa="Zdjęcia w danym repozytorium">
+    <div ng-show="messages.s == 404">
+        <a href="#/allRepo">Wroć do przeglądania folderów.</a>
+    </div>
+    <div ng-show="!messages">
     <h1>Zdjęcia w folderze: {{imgByRepo.data[0].repoName}} ({{imgByRepo.data.length}})</h1>
     <div ng-init="getImgByRepo()">
         <div class="row">
@@ -10,4 +14,5 @@
             </div>
         </div>
     </div>
+        </div>
 </section>

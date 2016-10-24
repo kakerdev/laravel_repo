@@ -58,6 +58,13 @@
             </div>
         </nav>
     </header>
+
+    <div class="alert alert-success" ng-show="messages.s == 200 || messages.s == 400 || messages.s == 404" role="alert">
+        {{messages.m}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <div ui-view=""></div>
 </div>
 

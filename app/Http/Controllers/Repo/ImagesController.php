@@ -40,7 +40,8 @@ class ImagesController extends Controller
             return response('Błąd zapytania SQL');
         }
         if($images->count() <= 0) {
-            return response('Nie dodałeś jeszcze żadnych zdjęć');
+            $x = array("m"=>"Nie dodałeś jeszcze żadnych zdjęć", "s"=>404);
+            return response()->json('Nie dodałeś jeszcze żadnych zdjęć');
         }
         return response()->json($images);
     }
@@ -51,7 +52,8 @@ class ImagesController extends Controller
         if($image) {
             return response()->json($image);
         } else {
-            return response('Brak zdjecia', 404);
+            $x = array("m"=>"Brak podanego zdjęcia", "s"=>404);
+            return response()->json('Brak podanego zdjęcia');
         }
     }
 
@@ -89,7 +91,8 @@ class ImagesController extends Controller
         if(!$image->save()) {
             return $this->errors(['message' => 'Wystąpił bład podczas zapisu zdjecia do bazy danych.', 'code' => 400]);
         }
-        return response('Zdjęcie zostało dodane.');
+        $x = array("m"=>"Zdjęcie zostało dodane", "s"=>200);
+        return response('Zdjęcie zostało dodane');
     }
     public function updateImg() {
         $image = images::where('id', $id_image)
@@ -110,7 +113,8 @@ class ImagesController extends Controller
             if(File::exists($image_path)) {
                 File::delete($image_path);
                 images::destroy($image->id);
-                return response('Zdjęcie zostało usuniętę', 200);
+                $x = array("m"=>"Zdjęcie zostało usuniętę", "s"=>200);
+                return response('Zdjęcie zostało usuniętę');
             }
 
         } else {
