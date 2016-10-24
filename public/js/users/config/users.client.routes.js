@@ -1,9 +1,12 @@
-angular.module('usersModule').config(function ($stateProvider, $urlRouterProvider) {
-    var Auth = ["$q", "AuthFactory", function ($q, AuthFactory) {
+angular.module('usersModule').config(function ($stateProvider, $urlRouterProvider, AuthFactory) {
+    $urlRouterProvider.otherwise('/home');
+    // function to check the authentication //
+    var Auth = ["$q", "AuthFactory", function ($q, AuthFactory, $window,$log) {
         if (AuthFactory.isLoggedIn()) {
             return true;
         } else {
             alert('brak dostępu do strony zaloguj się');
+            AuthFactory.changeUrl('home');
             return $q.reject({ authenticated: false });
         }
     }];
@@ -16,11 +19,13 @@ angular.module('usersModule').config(function ($stateProvider, $urlRouterProvide
         .state('profile', {
             url:'/profile',
             templateUrl: 'js/users/views/userProfile.client.view.html',
-            controller: 'usersCtrl'
+            controller: 'usersCtrl',
+            resolve: Auth
         })
         .state('settings', {
             url: '/settings',
             templateUrl: 'js/users/views/settings.client.view.html',
-            controller: 'usersCtrl'
+            controller: 'usersCtrl',
+            resolve: Auth
         })
 })

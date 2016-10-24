@@ -1,7 +1,7 @@
 angular.module('authModule').config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 
     $authProvider.loginUrl = '/api/authenticate';
-
+    $urlRouterProvider.otherwise('/home');
     $stateProvider
         .state('signin', {
             url: '/signin',
