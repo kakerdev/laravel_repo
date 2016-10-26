@@ -85,6 +85,7 @@
 <script src="js/main/controllers/main.client.controller.js"></script>
 <script src="js/main/config/main.client.routes.js"></script>
 
+
 <!-- auth module -->
 <script src="js/auth/auth.client.module.js"></script>
 <script src="js/auth/services/auth.client.service.js"></script>

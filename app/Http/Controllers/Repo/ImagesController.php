@@ -32,7 +32,7 @@ class ImagesController extends Controller
 
     //pobierz wszystkie zdjecia użytkownika ze wszystkich repo
     public function getAll() {
-        $images = images::select('images.*','repository.title as repo_name')->join('repository', function ($join) {
+        $images = images::select('images.*','repository.title as repo_name', 'repository.id as repo_id')->join('repository', function ($join) {
             $join->on('images.id_repository','=','repository.id')
                 ->where('repository.id_account','=',$this->user->id);
         })->get();
@@ -94,15 +94,22 @@ class ImagesController extends Controller
         $x = array("m"=>"Zdjęcie zostało dodane", "s"=>200);
         return response('Zdjęcie zostało dodane');
     }
-    public function updateImg() {
-        $image = images::where('id', $id_image)
-            ->where('id_repository', $id_repository)
-            ->get();
+    public function update(Request $request, $id) {
+        $image = images::where('id', $id)->first();
+        echo $request->repoID;
         if(!$image) {
             return $this->errors(['message' => 'Nie znaleziono zdjęcia.', 'code' => 404]);
         } else {
-            $image->title = $dataUpdate['title'];
-            $image->description = $dataUpdate['description'];
+            if($request->repoID == null) {
+                $repoID = $image->id_repository;
+            } else {
+                $repoID = $request->repoID;
+            }
+            $image->title = $request->title;
+            $image->id_repository = $repoID;
+            $image->description = $request->description;
+            $image->save();
+            return $image;
         }
     }
     public function destroy($id) {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Repo;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Validator;
 //tables
@@ -27,7 +28,6 @@ class RepoController extends Controller
         }
         return $galleries;
     }
-
     //tworzymy nowe repo
     public function createRepoUser($repoName) {
         $repoUser = Repository::select('id')
@@ -63,4 +63,30 @@ class RepoController extends Controller
         }
         return response()->json($images);
     }
+    public function update($id, Request $request) {
+        $repo = Repository::where('id_account', $this->user->id)->where('id', $id)->first();
+        if(!$repo) {
+            return $this->errors(['message' => 'Nie znaleziono repozytorium.', 'code' => 404]);
+        }
+        $repo->title=$request->title;
+        $repo->save();
+        return $repo;
+    }
+    public function destroy($id) {
+        $repo = Repository::where('id_account', $this->user->id)->where('id', $id)->first();
+        $images = images::select('*')->where('id_repository', $id)->get();
+        if($repo) {
+            //usuwamy wszystkie zdjęcia wraz z folderem
+            if($images->count()>0) {
+                foreach ($images as $image) {
+                    images::destroy($image->id);
+                }
+            }
+            Repository::destroy($repo->id);
+            return response('Folder został usunięty.', 200);
+        } else {
+            return response('Użytkownik nie autoryzowany');
+        }
+    }
+
 }

@@ -3,10 +3,29 @@
     <div ng-init="getRepoUser()">
         <h1>Twoje foldery</h1>
         <div class="alert alert-warning" role="alert" ng-if="repoUser.data == 'notFound'">Brak folderów.</div>
-        <ul ng-if="!notFound">
-            <li ng-repeat="f in repoUser.data">
-                <a href="#/showRepo/{{f.id}}">{{f.title}}</a>
-            </li>
-        </ul>
+        <table class="table table-bordered" ng-if="!notFound">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nazwa</th>
+                    <th>~</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="f in repoUser.data">
+                <td>{{$index}}</a></td>
+                <td>
+                    <a href="#/showRepo/{{f.id}}" ng-show="!edit">{{f.title}}</a>
+                    <input type="text" ng-model="f.title" ng-show="edit" required>
+                </td>
+                <td>
+                    <button class="btn btn-primary" ng-click="edit=!edit" ng-show="!edit">Edytuj</button>
+                    <button class="btn btn-success" ng-click="update(f.id); edit=!edit" ng-show="edit">Zapisz</button>
+                    <button class="btn btn-danger" ng-show="edit" ng-click="edit=!edit">Anuluj</button>
+                    <button class="btn btn-danger btn-ok" ng-hide="edit" ng-click="destroy(f.id)">Usuń</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </section>

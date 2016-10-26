@@ -30,6 +30,8 @@ Route::group(['prefix' => 'api'], function () {
     //Repository User
     Route::get('repository/repo/{id}', 'Repo\RepoController@getImgByRepo');
     Route::get('repository/get', 'Repo\RepoController@getRepoUser');
+    Route::post('repository/update/{id}', 'Repo\RepoController@update');
+    Route::delete('repository/destroy/{id}', 'Repo\RepoController@destroy');
     //Images
     Route::post('images/add', 'Repo\ImagesController@addImg');
     Route::get('images/showAll', 'Repo\ImagesController@getAll');

@@ -1,4 +1,5 @@
-angular.module('imagesModule').controller('imagesCtrl', function ($scope,$rootScope,$location, $stateParams, $http,$window, AuthFactory, RepoFactory, Upload) {
+angular.module('imagesModule').controller('imagesCtrl',
+    function ($scope,$rootScope,$location, $stateParams, $http,$window, customizationFactory,AuthFactory, RepoFactory, Upload) {
     // $scope.getRepoUser = function () {
     //     //odwołanie do kontrollera repoCtrl
     //     $rootScope.$on("repoCtrl", {});
@@ -6,7 +7,6 @@ angular.module('imagesModule').controller('imagesCtrl', function ($scope,$rootSc
     //na sztywno do poprawy szukamy folderow do wyboru
     $scope.getRepoUser = function () {
         RepoFactory.getRepoUser().then(function (res) {
-            console.log(res);
             $scope.repoUser = res;
         })
     }
@@ -61,9 +61,21 @@ angular.module('imagesModule').controller('imagesCtrl', function ($scope,$rootSc
             }
         }
     }
+
+    $scope.update = function (id) {
+        var data = {
+            title: this.img.title,
+            repoID: this.selectFolder,
+            description: this.img.description
+        }
+        $http.put('api/images/'+id, data).then(function (res) {
+            console.log(res);
+        })
+    }
+
     //usuniecie zdjecia z servera
     $scope.destroy = function (id) {
-        $http.delete('api/images/'+id).then(function (res) {
+        customizationFactory.destoryImg(id).then(function (res) {
             // if(res.data.st == 200) {
             //     $rootScope.messages = res.data;
             //     $scope.getAll();

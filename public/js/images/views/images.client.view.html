@@ -2,13 +2,54 @@
     <h1>Twoja galeria zdjęć</h1>
     <div ng-init="getAll()">
         <div class="row">
-            <div class="col-xs-6 col-md-3" ng-repeat="img in images.data">
-                <a href="#/images/image/{{img.id}}" target="_blank" class="thumbnail">
-                    <img src="upload/{{img.filename}}.{{img.extension}}" alt="">
-                </a>
-                <p>{{img.original_filename}}</p>
-                <button ng-click="destroy(img.id)" class="btn btn-danger">Usuń zdjęcie</button>
+            <div class="col-sm-6 col-md-4" ng-repeat="img in images.data">
+                <div class="thumbnail">
+                    <a href="#/images/image/{{img.id}}" target="_blank">
+                        <img src="upload/{{img.filename}}.{{img.extension}}" alt="">
+                    </a>
+                    <div class="caption">
+                        <h3>
+                            <a href="#/images/image/{{img.id}}" target="_blank" ng-hide="edit">
+                                {{img.title}}
+                            </a>
+                            <span ng-show="edit">
+                                Wpisz nową nazwe pliku:
+                                <input class="form-control" type="text" ng-model="img.title" ng-show="edit">
+                            </span>
+                        </h3>
+                        <p>
+                            <span ng-hide="edit">
+                            Folder: <a ng-hide="edit" href="#/showRepo/{{img.repo_id}}">{{img.repo_name}}</a>
+                            </span>
+                        <div ng-init="getRepoUser()" ng-show="edit">
+                                Wybierz folder:
+                            <select class="form-control" id="addToFolder" name="selectFolder" ng-model="selectFolder">
+                                <option ng-repeat="folder in repoUser.data" value="{{folder.id}}">{{folder.title}}</option>
+                            </select>
+                        </div>
+                        </p>
+                        <hr>
+                        <p ng-show="!edit">{{img.description}}</p>
+                        <p ng-show="edit">
+                            <textarea class="form-control" rows="5" id="description" ng-model="img.description" required></textarea>
+                        <hr>
+                        <p>
+                            <button class="btn btn-primary" ng-click="edit=!edit" ng-hide="edit" role="button">Edytuj</button>
+                            <button class="btn btn-success" ng-click="update(img.id); edit=!edit" ng-show="edit" role="button">Zapisz</button>
+                            <button class="btn btn-danger" ng-click="edit=!edit" ng-show="edit" role="button">Anuluj</button>
+                            <a href="#" class="btn btn-danger" ng-click="destroy(img.id)" ng-hide="edit" role="button">Usuń zdjęcie</a>
+                        </p>
+                    </div>
+                </div>
             </div>
+
+            <!--<div class="col-xs-6 col-md-3" ng-repeat="img in images.data">-->
+                <!--<a href="#/images/image/{{img.id}}" target="_blank" class="thumbnail">-->
+                    <!--<img src="upload/{{img.filename}}.{{img.extension}}" alt="">-->
+                <!--</a>-->
+                <!--<p>{{img.original_filename}}</p>-->
+                <!--<button ng-click="destroy(img.id)" class="btn btn-danger">Usuń zdjęcie</button>-->
+            <!--</div>-->
         </div>
     </div>
 </section>

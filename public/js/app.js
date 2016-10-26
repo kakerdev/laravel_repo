@@ -21,3 +21,13 @@ mainAppModule.controller('indexCtrl', function ($scope, AuthFactory) {
         AuthFactory.logout();
     }
 });
+//factory
+mainAppModule.factory('customizationFactory', function ($http) {
+    //usuniecie zdjecia z servera
+    var destroy = function (id) {
+        return $http.delete('api/images/'+id);
+    }
+    return {
+        destoryImg: destroy
+    }
+})
