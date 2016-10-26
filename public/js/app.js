@@ -12,6 +12,24 @@ mainAppModule.run(function($rootScope, $location, $window) {
         },
         function (a) {});
 });
+mainAppModule
+    .config(['$httpProvider', httpProviderConfig]);
+
+function httpProviderConfig($httpProvider) {
+
+    var interceptor = ['$rootScope', '$q', function ($rootScope, $q) {
+
+        return {
+
+            'responseError': function (rejection) {
+
+                return $q.reject(rejection);
+            }
+        };
+    }];
+
+    $httpProvider.interceptors.push(interceptor);
+}
 mainAppModule.controller('indexCtrl', function ($scope, AuthFactory) {
     $scope.isLoggedIn = AuthFactory.isLoggedIn();
     if($scope.isLoggedIn == true) {
