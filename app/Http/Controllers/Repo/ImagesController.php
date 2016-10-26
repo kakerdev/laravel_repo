@@ -40,7 +40,7 @@ class ImagesController extends Controller
             return response('Błąd zapytania SQL');
         }
         if($images->count() <= 0) {
-            return response()->json(["message"=>"Nie dodałeś jeszcze żadnych zdjęć", "status"=>false]);
+            return response()->json(["message"=>"Nie dodałeś jeszcze żadnych zdjęć", "stat"=>false]);
         }
         return response()->json($images);
     }
@@ -51,7 +51,7 @@ class ImagesController extends Controller
         if($image) {
             return response()->json($image);
         } else {
-            return response()->json(["message"=>"Brak podanego zdjęcia", "status"=>false]);
+            return response()->json(["message"=>"Brak podanego zdjęcia", "stat"=>false]);
         }
     }
 
@@ -87,7 +87,7 @@ class ImagesController extends Controller
         $image->original_filename = $file->getClientOriginalName();
         $image->extension = $extension;
         if(!$image->save()) {
-            return response()->json(['message' => 'Wystąpił bład podczas zapisu zdjecia do bazy danych.', 'status' => false]);
+            return response()->json(['message' => 'Wystąpił bład podczas zapisu zdjecia do bazy danych.', 'stat' => false]);
         }
         return response(['message' => 'Zdjęcie zostało dodane', 'status' => true]);
     }
@@ -95,7 +95,7 @@ class ImagesController extends Controller
         $image = images::where('id', $id)->first();
         echo $request->repoID;
         if(!$image) {
-            return response()->json(['message' => 'Nie znaleziono zdjęcia.', 'status' => false]);
+            return response()->json(['message' => 'Nie znaleziono zdjęcia.', 'stat' => false]);
         } else {
             if($request->repoID == null) {
                 $repoID = $image->id_repository;
@@ -117,11 +117,11 @@ class ImagesController extends Controller
             if(File::exists($image_path)) {
                 File::delete($image_path);
                 images::destroy($image->id);
-                return response()->json(['message' => 'Zdjęcie zostało usunięte', 'status' => true]);
+                return response()->json(['message' => 'Zdjęcie zostało usunięte', 'stat' => true]);
             }
 
         } else {
-            return response()->json(['message' => 'Błąd przy usuwaniu zdjecia', 'status' => false]);
+            return response()->json(['message' => 'Błąd przy usuwaniu zdjecia', 'stat' => false]);
         }
     }
 }

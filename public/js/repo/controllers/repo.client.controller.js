@@ -5,7 +5,7 @@ angular.module('repoModule').controller('repoCtrl', function ($scope, $rootScope
     $scope.edit = false;
     $scope.getRepoUser = function () {
         RepoFactory.getRepoUser().then(function (res) {
-            if(res.data.status == false) {
+            if(res.data.stat == false) {
                 $scope.error = res.data.message;
             } else {
                 $scope.repoUser = res;
@@ -15,7 +15,7 @@ angular.module('repoModule').controller('repoCtrl', function ($scope, $rootScope
     $scope.getImgByRepo = function () {
         RepoFactory.getImgByRepo($stateParams.id_repo).then(function (res) {
             console.log(res);
-            if(res.data.status == false) {
+            if(res.data.stat == false) {
                 $scope.error = res.data.message;
             } else {
                 $scope.imgByRepo = res;

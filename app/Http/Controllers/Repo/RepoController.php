@@ -24,7 +24,7 @@ class RepoController extends Controller
     public function getRepoUser() {
         $galleries = Repository::where('id_account', $this->user->id)->get();
         if($galleries->count() == 0) {
-            return response()->json(["message"=>"Brak folderów.", "status"=>false]);
+            return response()->json(["message"=>"Brak folderów.", "stat"=>false]);
         }
         return $galleries;
     }
@@ -58,14 +58,14 @@ class RepoController extends Controller
             ->where('repository.id','=', $id_repository)
             ->get();
         if($images->count() <= 0) {
-            return response()->json(["message"=>"Brak zdjęć w danym folderze", "status"=>false]);
+            return response()->json(["message"=>"Brak zdjęć w danym folderze", "stat"=>false]);
         }
         return response()->json($images);
     }
     public function update($id, Request $request) {
         $repo = Repository::where('id_account', $this->user->id)->where('id', $id)->first();
         if(!$repo) {
-            return response()->json(["message"=>"Nie znaleziono folderu", "status"=>false]);
+            return response()->json(["message"=>"Nie znaleziono folderu", "stat"=>false]);
         }
         $repo->title=$request->title;
         $repo->save();
@@ -84,7 +84,7 @@ class RepoController extends Controller
             Repository::destroy($repo->id);
             return response('Folder został usunięty.', 200);
         } else {
-            return response()->json(["message"=>"Użytkownik nie autoryzowany.", "status"=>false]);
+            return response()->json(["message"=>"Użytkownik nie autoryzowany.", "stat"=>false]);
 
         }
     }

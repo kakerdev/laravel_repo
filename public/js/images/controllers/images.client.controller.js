@@ -7,7 +7,7 @@ angular.module('imagesModule').controller('imagesCtrl',
     //na sztywno do poprawy szukamy folderow do wyboru
         $scope.getRepoUser = function () {
             RepoFactory.getRepoUser().then(function (res) {
-                if(res.data.status == false) {
+                if(res.data.stat == false) {
                     $scope.error = res.data.message;
                 } else {
                     $scope.repoUser = res;
@@ -19,7 +19,7 @@ angular.module('imagesModule').controller('imagesCtrl',
     //pobierz wszystkie zdjęcia użtkownika
     $scope.getAll = function () {
         $http.get('api/images/showAll').then(function (res) {
-            if(res.data.status == false) {
+            if(res.data.stat == false) {
                $scope.error = res.data.message;
             } else {
                  $scope.images = res;
