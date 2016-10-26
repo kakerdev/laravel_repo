@@ -33,6 +33,7 @@ angular.module('authModule').factory('AuthFactory', function ($http, $auth , $lo
         var url = "http://" + $window.location.host + "/#/"+path;
         $log.log(url);
         $window.location.href = url;
+        $state.transitionTo('images', null, {reload: true, notify:true});
         $window.location.reload();
     }
     var logout = function () {

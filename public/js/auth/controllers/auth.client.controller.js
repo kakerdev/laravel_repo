@@ -47,8 +47,6 @@ angular.module('authModule').controller('authCtrl', function ($scope,$log, $auth
         //odbieramy dane zalogowanego użytkownika
         .then(function (res) {
             AuthFactory.setUserData(res.data.user);
-            $state.transitionTo('images', null, {reload: true, notify:true});
-            window.location.reload();
             AuthFactory.changeUrl('images');
         })
     }
