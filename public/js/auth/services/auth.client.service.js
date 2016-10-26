@@ -34,7 +34,6 @@ angular.module('authModule').factory('AuthFactory', function ($http, $auth , $lo
         $log.log(url);
         $window.location.href = url;
         $window.location.reload();
-        $state.transitionTo('images', null, {reload: true, notify:true});
     }
     var logout = function () {
         $auth.logout().then(function () {
