@@ -89,7 +89,7 @@ class ImagesController extends Controller
         if(!$image->save()) {
             return response()->json(['message' => 'Wystąpił bład podczas zapisu zdjecia do bazy danych.', 'stat' => false]);
         }
-        return response(['message' => 'Zdjęcie zostało dodane', 'status' => true]);
+        return response('Zdjęcie zostało dodane',200);
     }
     public function update(Request $request, $id) {
         $image = images::where('id', $id)->first();
