@@ -15,7 +15,7 @@ angular.module('imagesModule').config(['$stateProvider', '$urlRouterProvider',
     } else {
         $urlRouterProvider.otherwise('/home');
     }
-    $urlRouterProvider.otherwise('/home');
+    //$urlRouterProvider.otherwise('/home');
 
 
     $stateProvider
