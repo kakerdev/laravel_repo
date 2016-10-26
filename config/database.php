@@ -53,32 +53,32 @@ return [
             'prefix' => '',
         ],
 
-        'mysql' => [
-            'driver' => 'mysql',
-            'host' => env('DB_HOST', 'localhost'),//localhost
-            'port' => env('DB_PORT', '3306'),
-            'database' => 'repoApp',
-            'username' => 'repoApp',
-            'password' => 'repoApp',
-            'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'prefix' => '',
-            'strict' => true,
-            'engine' => null,
-        ],
 //        'mysql' => [
 //            'driver' => 'mysql',
-//            'host' => 'us-cdbr-iron-east-04.cleardb.net',//localhost
-//            //'port' => env('DB_PORT', '3306'),
-//            'database' => 'heroku_c3e02e4d542f005',
-//            'username' => 'b40e7b3cbec1c6',
-//            'password' => '5b7ee37e',
+//            'host' => env('DB_HOST', 'localhost'),//localhost
+//            'port' => env('DB_PORT', '3306'),
+//            'database' => 'repoApp',
+//            'username' => 'repoApp',
+//            'password' => 'repoApp',
 //            'charset' => 'utf8',
 //            'collation' => 'utf8_unicode_ci',
 //            'prefix' => '',
 //            'strict' => true,
 //            'engine' => null,
 //        ],
+        'mysql' => [
+            'driver' => 'mysql',
+            'host' => 'us-cdbr-iron-east-04.cleardb.net',//localhost
+            //'port' => env('DB_PORT', '3306'),
+            'database' => 'heroku_c3e02e4d542f005',
+            'username' => 'b40e7b3cbec1c6',
+            'password' => '5b7ee37e',
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
 
         'pgsql' => [
             'driver' => 'pgsql',
