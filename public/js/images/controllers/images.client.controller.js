@@ -17,7 +17,8 @@ angular.module('imagesModule').controller('imagesCtrl',
         $http.get('api/images/showAll').then(function (res) {
             console.log('getImg');
             if(res.data.st == 404) {
-                $rootScope.messages = res.data;
+               $scope.error = res.data;
+                console.log(res);
             } else {
                 $scope.images = res;
             }

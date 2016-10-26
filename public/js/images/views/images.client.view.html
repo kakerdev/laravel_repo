@@ -1,7 +1,8 @@
 <section nazwa="Wszystkie zdjęcia">
     <h1>Twoja galeria zdjęć</h1>
     <div ng-init="getAll()">
-        <div class="row">
+        <div ng-if="error">{{error.m}}</div>
+        <div class="row" ng-hide="error">
             <div class="col-sm-6 col-md-4" ng-repeat="img in images.data">
                 <div class="thumbnail">
                     <a href="#/images/image/{{img.id}}" target="_blank">
@@ -43,13 +44,6 @@
                 </div>
             </div>
 
-            <!--<div class="col-xs-6 col-md-3" ng-repeat="img in images.data">-->
-                <!--<a href="#/images/image/{{img.id}}" target="_blank" class="thumbnail">-->
-                    <!--<img src="upload/{{img.filename}}.{{img.extension}}" alt="">-->
-                <!--</a>-->
-                <!--<p>{{img.original_filename}}</p>-->
-                <!--<button ng-click="destroy(img.id)" class="btn btn-danger">Usuń zdjęcie</button>-->
-            <!--</div>-->
         </div>
     </div>
 </section>
