@@ -31,7 +31,6 @@ angular.module('authModule').factory('AuthFactory', function ($http, $auth , $lo
     }
     var changeUrl = function (path) {
         var url = "http://" + $window.location.host + "/#/"+path;
-        alert(url);
         $log.log(url);
         $window.location.href = url;
         $window.location.reload();

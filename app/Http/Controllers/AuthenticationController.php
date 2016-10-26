@@ -67,9 +67,14 @@ class AuthenticationController extends Controller
     public function register(Request $request) {
         $newuser = $request->all();//odbieramy dane użytkownika
         $password=Hash::make($request->input('password'));
-
         $newuser['password'] = $password;
-        return Accounts::create($newuser);
+        $accounts = Accounts::where('email',$request->input('email'))->get();
+        if($accounts->count() == 1) {
+            return response()->json(['status' => false, 'message' => 'Podany adress email już istnieje']);
+        } else {
+            return Accounts::create($newuser);
+        }
+
     }
     //resetowanie hasla użytkownika
     public function sendPassword(Request $request) {

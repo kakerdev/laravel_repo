@@ -5,15 +5,18 @@ angular.module('repoModule').controller('repoCtrl', function ($scope, $rootScope
     $scope.edit = false;
     $scope.getRepoUser = function () {
         RepoFactory.getRepoUser().then(function (res) {
-            console.log(res);
-            $scope.repoUser = res;
+            if(res.data.status == false) {
+                $scope.error = res.data.message;
+            } else {
+                $scope.repoUser = res;
+            }
         })
     }
     $scope.getImgByRepo = function () {
         RepoFactory.getImgByRepo($stateParams.id_repo).then(function (res) {
             console.log(res);
-            if(res.data.s == 404) {
-                $rootScope.messages = res.data;
+            if(res.data.status == false) {
+                $scope.error = res.data.message;
             } else {
                 $scope.imgByRepo = res;
             }

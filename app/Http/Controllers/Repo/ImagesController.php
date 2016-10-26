@@ -40,8 +40,7 @@ class ImagesController extends Controller
             return response('Błąd zapytania SQL');
         }
         if($images->count() <= 0) {
-            $x = array("m"=>"Nie dodałeś jeszcze żadnych zdjęć", "s"=>404);
-            return response()->json('Nie dodałeś jeszcze żadnych zdjęć');
+            return response()->json(["message"=>"Nie dodałeś jeszcze żadnych zdjęć", "status"=>false]);
         }
         return response()->json($images);
     }
@@ -52,8 +51,7 @@ class ImagesController extends Controller
         if($image) {
             return response()->json($image);
         } else {
-            $x = array("m"=>"Brak podanego zdjęcia", "s"=>404);
-            return response()->json('Brak podanego zdjęcia');
+            return response()->json(["message"=>"Brak podanego zdjęcia", "status"=>false]);
         }
     }
 
@@ -89,16 +87,15 @@ class ImagesController extends Controller
         $image->original_filename = $file->getClientOriginalName();
         $image->extension = $extension;
         if(!$image->save()) {
-            return $this->errors(['message' => 'Wystąpił bład podczas zapisu zdjecia do bazy danych.', 'code' => 400]);
+            return response()->json(['message' => 'Wystąpił bład podczas zapisu zdjecia do bazy danych.', 'status' => false]);
         }
-        $x = array("m"=>"Zdjęcie zostało dodane", "s"=>200);
-        return response('Zdjęcie zostało dodane');
+        return response(['message' => 'Zdjęcie zostało dodane', 'status' => true]);
     }
     public function update(Request $request, $id) {
         $image = images::where('id', $id)->first();
         echo $request->repoID;
         if(!$image) {
-            return $this->errors(['message' => 'Nie znaleziono zdjęcia.', 'code' => 404]);
+            return response()->json(['message' => 'Nie znaleziono zdjęcia.', 'status' => false]);
         } else {
             if($request->repoID == null) {
                 $repoID = $image->id_repository;
@@ -120,12 +117,11 @@ class ImagesController extends Controller
             if(File::exists($image_path)) {
                 File::delete($image_path);
                 images::destroy($image->id);
-                $x = array("m"=>"Zdjęcie zostało usuniętę", "s"=>200);
-                return response('Zdjęcie zostało usuniętę');
+                return response()->json(['message' => 'Zdjęcie zostało usunięte', 'status' => true]);
             }
 
         } else {
-            return response('Błąd przy usuwaniu zdjecia', 400);
+            return response()->json(['message' => 'Błąd przy usuwaniu zdjecia', 'status' => false]);
         }
     }
 }

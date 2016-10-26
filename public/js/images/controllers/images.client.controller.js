@@ -5,22 +5,24 @@ angular.module('imagesModule').controller('imagesCtrl',
     //     $rootScope.$on("repoCtrl", {});
     // }
     //na sztywno do poprawy szukamy folderow do wyboru
-    $scope.getRepoUser = function () {
-        RepoFactory.getRepoUser().then(function (res) {
-            $scope.repoUser = res;
-        })
-    }
+        $scope.getRepoUser = function () {
+            RepoFactory.getRepoUser().then(function (res) {
+                if(res.data.status == false) {
+                    $scope.error = res.data.message;
+                } else {
+                    $scope.repoUser = res;
+                }
+            })
+        }
     //!!!!!!!!!!!!!!!!!
 
     //pobierz wszystkie zdjęcia użtkownika
     $scope.getAll = function () {
         $http.get('api/images/showAll').then(function (res) {
-            console.log('getImg');
-            if(res.data.st == 404) {
-               $scope.error = res.data;
-                console.log(res);
+            if(res.data.status == false) {
+               $scope.error = res.data.message;
             } else {
-                $scope.images = res;
+                 $scope.images = res;
             }
         })
     }

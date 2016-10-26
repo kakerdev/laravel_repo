@@ -11,7 +11,19 @@ angular.module('authModule').controller('authCtrl', function ($scope,$log, $auth
         }
         AuthFactory.signup(signupData).success(function (res) {
             //automatyczne logowanie użytkownika po rejestracji
-            $scope.signin(signupData.email, signupData.password);
+            console.log(res);
+            if(res.status == false) {
+                $scope.errorSignup = res.message;
+            } else {
+                $scope.signin(signupData.email, signupData.password);
+            }
+        }, function (error) {
+            console.log(error.data.error);
+            if(error.data.error) {
+                $scope.errorSignup = error;
+            } else {
+                $state.go('error', {obj: error});
+            }
         })
     }
 
@@ -35,8 +47,8 @@ angular.module('authModule').controller('authCtrl', function ($scope,$log, $auth
         //odbieramy dane zalogowanego użytkownika
         .then(function (res) {
             AuthFactory.setUserData(res.data.user);
-            // $state.transitionTo('images', null, {reload: true, notify:true});
-            // window.location.reload();
+            $state.transitionTo('images', null, {reload: true, notify:true});
+            window.location.reload();
             AuthFactory.changeUrl('images');
         })
     }

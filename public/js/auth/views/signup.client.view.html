@@ -1,5 +1,6 @@
 <section>
     <h1>Zarejestruj się</h1>
+    <div class="alert alert-danger" role="alert" ng-if="errorSignup">{{errorSignup}}</div>
     <form name="signupForm" ng-submit="signup()">
         <div class="form-group">
             <label for="firstname">Imie</label>

@@ -1,8 +1,8 @@
 <section nazwa="Wszystkie zdjęcia">
     <h1>Twoja galeria zdjęć</h1>
     <div ng-init="getAll()">
-        <div ng-if="error">{{error.m}}</div>
-        <div class="row" ng-hide="error">
+        <div class="alert alert-danger" role="alert" ng-if="error">{{error}}</div>
+        <div class="row" ng-show="!error">
             <div class="col-sm-6 col-md-4" ng-repeat="img in images.data">
                 <div class="thumbnail">
                     <a href="#/images/image/{{img.id}}" target="_blank">

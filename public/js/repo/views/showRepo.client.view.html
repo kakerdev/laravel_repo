@@ -1,9 +1,10 @@
 <section nazwa="Twoja galeria">
-
     <div ng-init="getRepoUser()">
         <h1>Twoje foldery</h1>
-        <div class="alert alert-warning" role="alert" ng-if="repoUser.data == 'notFound'">Brak folderów.</div>
-        <table class="table table-bordered" ng-if="!notFound">
+        <div class="alert alert-danger" role="alert" ng-if="error">
+            {{error}}
+        </div>
+        <table class="table table-bordered" ng-if="!error">
             <thead>
                 <tr>
                     <th>#</th>
