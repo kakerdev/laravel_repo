@@ -117,7 +117,7 @@ class ImagesController extends Controller
             if(File::exists($image_path)) {
                 File::delete($image_path);
                 images::destroy($image->id);
-                return response()->json('Zdjęcie zostało usunięte', 200);
+                return response('Zdjęcie zostało usunięte', 200);
             }
 
         } else {

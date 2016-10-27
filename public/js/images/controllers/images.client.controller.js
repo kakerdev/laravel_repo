@@ -79,12 +79,7 @@ angular.module('imagesModule').controller('imagesCtrl',
     //usuniecie zdjecia z servera
     $scope.destroy = function (id) {
         customizationFactory.destoryImg(id).then(function (res) {
-            // if(res.data.st == 200) {
-            //     $rootScope.messages = res.data;
-            //     $scope.getAll();
-            // }
             $scope.getAll();
-
         })
     }
 
