@@ -12,7 +12,7 @@
             <span class="red" ng-if="signinPassword.length < 6">Podaj minimum 6 znaków.</span>
         </div>
         <div class="form-group">
-            <a href="#/forgotPassword">Zapomniałem hasła</a>
+            <a href="/password/reset">Zapomniałem hasła</a>
         </div>
         <button type="submit" class="btn btn-primary" ng-disabled="signinForm.$invalid || signinPassword.length < 6">Zaloguj się</button>
     </form>

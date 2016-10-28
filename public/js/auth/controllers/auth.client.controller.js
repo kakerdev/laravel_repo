@@ -56,7 +56,7 @@ angular.module('authModule').controller('authCtrl', function ($scope,$log, $auth
     //zapomniałem hasła
     $scope.forgotPassword = function () {
         console.log(this.email);
-        $http.post('/api/forgotPassword', this.email).success(function (res) {
+        $http.post('/password/email', this.email).success(function (res) {
             console.log(res);
         })
     }
